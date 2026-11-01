@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Private Wear India</title>
+<style>
+:root {
+  --site-primary: #b51d72;
+  --site-on-primary: #ffffff;
+  --site-secondary: #241326;
+  --site-on-secondary: #fff5fb;
+  --site-background: #100d12;
+  --site-on-background: #f7eff5;
+  --site-font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --site-font-heading: Georgia, "Times New Roman", serif;
+  --site-heading-scale: 1;
+  --site-spacing-scale: 1;
+  --site-radius-scale: 1;
+  --site-decoration-opacity: 1;
+  --surface: #1a151d;
+  --surface-2: #211a24;
+  --muted: #b7aab7;
+  --line: #3a2c3b;
+  --gold: #e6c28b;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: var(--site-font-body); background: var(--site-background); color: var(--site-on-background); }
+button, input { font: inherit; }
+button { cursor: pointer; }
+#app { min-height: 100vh; width: 100%; background-color: var(--site-background); color: var(--site-on-background); overflow: hidden; }
+.topbar { display:flex; align-items:center; justify-content:space-between; gap:16px; padding: calc(18px * var(--site-spacing-scale)) max(5vw, 20px); border-bottom:1px solid var(--line); background:var(--site-secondary); }
+.brand { display:flex; align-items:center; gap:12px; }
+.brand-mark { width:42px; height:42px; border:1px solid var(--gold); border-radius:50%; display:grid; place-items:center; color:var(--gold); font-family:var(--site-font-heading); font-weight:700; }
+.brand-name { font-family:var(--site-font-heading); font-size:20px; letter-spacing:.02em; }
+.brand-name span { color:var(--gold); }
+.top-actions { display:flex; align-items:center; gap:10px; }
+.pill { border:1px solid var(--line); color:var(--site-on-secondary); padding:9px 13px; border-radius:999px; background:transparent; font-size:12px; }
+.pill.primary { background:var(--site-primary); border-color:var(--site-primary); }
+main { max-width:1180px; margin:0 auto; padding:30px 22px 70px; }
+.notice { border:1px solid #75503b; color:#f1d5b1; background:#2a1d1b; border-radius:calc(14px * var(--site-radius-scale)); padding:12px 15px; font-size:13px; line-height:1.5; margin-bottom:22px; }
+.profile { display:grid; grid-template-columns: 1fr auto; gap:20px; align-items:center; padding:22px; background:linear-gradient(120deg, #261729, #17121b 65%); border:1px solid var(--line); border-radius:calc(20px * var(--site-radius-scale)); }
+.profile-main { display:flex; gap:17px; align-items:center; }
+.avatar { width:76px; height:76px; flex:0 0 auto; border-radius:50%; display:grid; place-items:center; background:radial-gradient(circle at 30% 20%, #e6c28b, #8f285f 55%, #27142a); color:white; font-family:var(--site-font-heading); font-size:25px; border:2px solid #e6c28b; }
+h1,h2,h3,p { margin-top:0; }
+h1 { font-family:var(--site-font-heading); font-size:calc(32px * var(--site-heading-scale)); margin-bottom:6px; }
+.sub { color:var(--muted); margin:0; }
+.stats { display:flex; gap:26px; margin-top:14px; color:var(--muted); font-size:12px; }
+.stats strong { display:block; color:var(--site-on-background); font-size:17px; }
+.profile-actions { display:flex; gap:9px; }
+.btn { border:1px solid var(--line); border-radius:999px; padding:11px 17px; color:var(--site-on-background); background:transparent; }
+.btn.primary { background:var(--site-primary); border-color:var(--site-primary); color:var(--site-on-primary); }
+.btn:focus-visible, input:focus-visible { outline:2px solid var(--gold); outline-offset:3px; }
+.trust-row { display:flex; flex-wrap:wrap; gap:10px 24px; padding:17px 4px 23px; color:var(--muted); font-size:12px; }
+.trust-row span::before { content:"•"; color:var(--gold); margin-right:8px; }
+.section-head { display:flex; align-items:end; justify-content:space-between; gap:15px; margin:26px 0 17px; }
+.section-head h2 { font-family:var(--site-font-heading); font-size:calc(26px * var(--site-heading-scale)); margin:0; }
+.section-head p { color:var(--muted); margin:5px 0 0; font-size:13px; }
+.filters { display:flex; gap:8px; flex-wrap:wrap; }
+.filter { padding:8px 13px; border:1px solid var(--line); border-radius:999px; color:var(--muted); background:transparent; font-size:12px; }
+.filter.active { color:white; background:var(--site-primary); border-color:var(--site-primary); }
+.grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:17px; }
+.product { overflow:hidden; border:1px solid var(--line); border-radius:calc(17px * var(--site-radius-scale)); background:var(--surface); }
+.product-art { height:205px; display:grid; place-items:center; background:radial-gradient(circle at 50% 35%, #5b3455, #2b1d2d 60%, #1a151d); position:relative; }
+.fold { width:140px; height:92px; border-radius:22px 22px 34px 34px; background:linear-gradient(135deg,#17151a,#45404b 45%,#17151a); transform:rotate(-8deg); box-shadow:0 18px 28px #08060999; position:relative; }
+.fold:before { content:""; position:absolute; left:12px; right:12px; top:12px; height:12px; border-top:2px solid #d2b7cb; border-radius:50%; }
+.fold.lilac { background:linear-gradient(135deg,#8e6a9b,#c6a4cf 48%,#775384); }
+.fold.rose { background:linear-gradient(135deg,#8f344f,#d58ba0 48%,#74283f); }
+.tag { position:absolute; top:12px; left:12px; background:#130f17cc; border:1px solid #ffffff24; color:#f3d6e9; border-radius:999px; padding:6px 9px; font-size:10px; }
+.product-info { padding:15px; }
+.product-info h3 { font-size:15px; margin-bottom:6px; }
+.product-info p { color:var(--muted); font-size:12px; line-height:1.5; min-height:36px; margin-bottom:12px; }
+.product-bottom { display:flex; justify-content:space-between; align-items:center; gap:8px; }
+.price { color:var(--gold); font-weight:700; }
+.small-btn { border:1px solid var(--site-primary); color:#fff; background:var(--site-primary); border-radius:999px; padding:8px 11px; font-size:11px; }
+.empty { display:none; padding:25px; border:1px dashed var(--line); color:var(--muted); border-radius:15px; text-align:center; }
+.footer { margin-top:34px; padding:20px 0; border-top:1px solid var(--line); color:var(--muted); font-size:11px; line-height:1.6; }
+.modal-backdrop { position:fixed; inset:0; z-index:10; display:none; place-items:center; padding:20px; background:#050407d9; }
+.modal { width:min(460px,100%); padding:24px; background:var(--surface-2); border:1px solid var(--line); border-radius:20px; box-shadow:0 24px 80px #0009; }
+.modal h2 { font-family:var(--site-font-heading); margin-bottom:8px; }
+.modal p { color:var(--muted); font-size:13px; line-height:1.6; }
+.modal-actions { display:flex; justify-content:flex-end; gap:9px; margin-top:18px; }
+.input { width:100%; border:1px solid var(--line); border-radius:11px; background:#100d12; color:white; padding:12px; margin:7px 0 13px; }
+.age-screen { position:fixed; inset:0; z-index:20; display:grid; place-items:center; padding:20px; background:#09070b; }
+.age-card { max-width:430px; text-align:center; padding:30px; border:1px solid var(--line); border-radius:22px; background:var(--surface); }
+.age-mark { font-family:var(--site-font-heading); color:var(--gold); font-size:35px; margin-bottom:10px; }
+.age-card p { color:var(--muted); font-size:13px; line-height:1.6; }
+@media(max-width:760px) { .profile { grid-template-columns:1fr; } .profile-actions { justify-content:flex-start; } .grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .product-art { height:170px; } .topbar { padding:14px 16px; } .top-actions .pill:not(.primary) { display:none; } }
+@media(max-width:480px) { main { padding:20px 14px 45px; } .brand-name { font-size:16px; } .avatar { width:60px; height:60px; } h1 { font-size:25px; } .stats { gap:17px; } .grid { gap:10px; } .product-art { height:135px; } .fold { transform:scale(.8) rotate(-8deg); } .product-info { padding:11px; } .product-info p { min-height:54px; } .section-head { align-items:flex-start; flex-direction:column; } }
+</style>
+</head>
+<body>
+<div id="app" data-sites-preview-theme="custom">
+  <header class="topbar">
+    <div class="brand"><div class="brand-mark">PWI</div><div class="brand-name"><span>PRIVATE WEAR</span> INDIA</div></div>
+    <div class="top-actions"><button class="pill" id="aboutBtn">About seller</button><button class="pill primary" id="enquiryTop">My enquiries <span id="countTop">0</span></button></div>
+  </header>
+  <main>
+    <div class="notice"><strong>Preview store only:</strong> sample listings and prices are illustrative. No checkout or payment is active; UPI can be enabled only after the relevant platform/payment provider confirms this product category is permitted.</div>
+    <section class="profile">
+      <div>
+        <div class="profile-main"><div class="avatar">PWI</div><div><h1>Private Wear India</h1><p class="sub">Independent personal-wear seller · India</p><div class="stats"><div><strong>03</strong>Demo listings</div><div><strong>—</strong>Followers</div><div><strong>New</strong>Seller status</div></div></div></div>
+      </div>
+      <div class="profile-actions"><button class="btn primary" id="followBtn">＋ Follow</button><button class="btn" id="messageBtn">Message seller</button></div>
+    </section>
+    <div class="trust-row"><span>Seller identity kept private on public profile</span><span>Enquiry before order</span><span>Adults 18+ only</span></div>
+    <section>
+      <div class="section-head"><div><h2>Available listings</h2><p>Demo catalogue · actual items must be accurately described</p></div><div class="filters"><button class="filter active" data-filter="all">All</button><button class="filter" data-filter="dark">Dark</button><button class="filter" data-filter="colour">Colour</button></div></div>
+      <div class="grid" id="productGrid">
+        <article class="product" data-kind="dark"><div class="product-art"><span class="tag">DEMO ITEM 01</span><div class="fold"></div></div><div class="product-info"><h3>Black personal-wear item</h3><p>Sample listing · condition and details to be confirmed before any order.</p><div class="product-bottom"><span class="price">₹ —</span><button class="small-btn enquire" data-item="Black personal-wear item">Enquire</button></div></div></article>
+        <article class="product" data-kind="colour"><div class="product-art"><span class="tag">DEMO ITEM 02</span><div class="fold lilac"></div></div><div class="product-info"><h3>Lilac personal-wear item</h3><p>Sample listing · no real product or stock represented.</p><div class="product-bottom"><span class="price">₹ —</span><button class="small-btn enquire" data-item="Lilac personal-wear item">Enquire</button></div></div></article>
+        <article class="product" data-kind="colour"><div class="product-art"><span class="tag">DEMO ITEM 03</span><div class="fold rose"></div></div><div class="product-info"><h3>Rose personal-wear item</h3><p>Sample listing · publish only if the category is permitted.</p><div class="product-bottom"><span class="price">₹ —</span><button class="small-btn enquire" data-item="Rose personal-wear item">Enquire</button></div></div></article>
+      </div>
+      <div class="empty" id="emptyState">No demo listings in this category.</div>
+    </section>
+    <footer class="footer">Private Wear India · Storefront concept preview. All users must be 18 or older. Do not upload explicit imagery or personal data. Before accepting orders, verify applicable Indian law, platform rules, shipping restrictions, and written UPI/payment-provider approval for the exact goods being sold.</footer>
+  </main>
+</div>
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal"><h2 id="modalTitle">Enquiry</h2><p id="modalText">Send an enquiry about this demo listing.</p><label for="buyerMessage" class="sub">Your message</label><input class="input" id="buyerMessage" placeholder="Write your question (demo only)"><div class="modal-actions"><button class="btn" id="closeModal">Close</button><button class="btn primary" id="sendDemo">Save demo enquiry</button></div></div></div>
+<div class="age-screen" id="ageScreen"><div class="age-card"><div class="age-mark">PWI</div><h2>Adults only · 18+</h2><p>This storefront concept is intended for adults only. By continuing, you confirm that you are at least 18 years old and agree to view a demo catalogue.</p><button class="btn primary" id="confirmAge">I am 18 or older — Enter</button></div></div>
+<script>
+const ageScreen = document.getElementById('ageScreen');
+document.getElementById('confirmAge').addEventListener('click', () => ageScreen.style.display = 'none');
+const backdrop = document.getElementById('modalBackdrop');
+const modalText = document.getElementById('modalText');
+let selectedItem = '';
+let enquiryCount = 0;
+function openModal(item) { selectedItem = item; modalText.textContent = 'Demo enquiry for: ' + item + '. This preview does not send messages or collect payments.'; backdrop.style.display = 'grid'; }
+function closeModal() { backdrop.style.display = 'none'; }
+document.querySelectorAll('.enquire').forEach(button => button.addEventListener('click', () => openModal(button.dataset.item)));
+document.getElementById('messageBtn').addEventListener('click', () => openModal('Message seller'));
+document.getElementById('enquiryTop').addEventListener('click', () => openModal('Your enquiry list'));
+document.getElementById('aboutBtn').addEventListener('click', () => openModal('About Private Wear India'));
+document.getElementById('closeModal').addEventListener('click', closeModal);
+document.getElementById('sendDemo').addEventListener('click', () => { enquiryCount++; document.getElementById('countTop').textContent = enquiryCount; document.getElementById('modalTitle').textContent = 'Demo enquiry saved'; modalText.textContent = 'Your demo interaction was recorded only in this preview session. No message was sent and no order was placed.'; document.getElementById('buyerMessage').value = ''; });
+document.getElementById('followBtn').addEventListener('click', event => { event.currentTarget.textContent = event.currentTarget.textContent.includes('Following') ? '＋ Follow' : '✓ Following'; });
+document.querySelectorAll('.filter').forEach(button => button.addEventListener('click', () => { document.querySelectorAll('.filter').forEach(b => b.classList.remove('active')); button.classList.add('active'); let shown = 0; document.querySelectorAll('.product').forEach(card => { const visible = button.dataset.filter === 'all' || card.dataset.kind === button.dataset.filter; card.style.display = visible ? '' : 'none'; if (visible) shown++; }); document.getElementById('emptyState').style.display = shown ? 'none' : 'block'; }));
+backdrop.addEventListener('click', event => { if (event.target === backdrop) closeModal(); });
+</script>
+</body>
+</html>
